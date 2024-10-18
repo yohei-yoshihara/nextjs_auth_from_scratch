@@ -7,7 +7,7 @@ import { decrypt } from "@/app/lib/session";
 import db from "@/app/lib/db";
 
 export const verifySession = cache(async () => {
-  const cookie = cookies().get("session")?.value;
+  const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
 
   if (!session?.userId) {

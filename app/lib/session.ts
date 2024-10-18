@@ -59,7 +59,7 @@ export async function createSession(id: number, role: string) {
   const session = await encrypt({ sessionId, userId: id, role, expiresAt });
 
   // 3. Store the session in cookies for optimistic auth checks
-  cookies().set("session", session, {
+  (await cookies()).set("session", session, {
     httpOnly: true,
     secure: false, // this must be true if running on a production
     expires: expiresAt,
@@ -70,7 +70,7 @@ export async function createSession(id: number, role: string) {
 }
 
 export async function updateSession() {
-  const session = cookies().get("session")?.value;
+  const session = (await cookies()).get("session")?.value;
   const payload = await decrypt(session);
 
   if (!session || !payload) {
@@ -78,7 +78,7 @@ export async function updateSession() {
   }
 
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  cookies().set("session", session, {
+  (await cookies()).set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expires,
@@ -88,5 +88,5 @@ export async function updateSession() {
 }
 
 export async function deleteSession() {
-  cookies().delete("session");
+  (await cookies()).delete("session");
 }

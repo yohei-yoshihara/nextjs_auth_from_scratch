@@ -16,13 +16,14 @@ export default async function middleware(req: NextRequest) {
   console.log("isPublicRoute = ", isPublicRoute);
 
   // 3. Decrypt the session from the cookie
-  console.log("cookies = ", cookies());
-  const cookie = cookies().get("session")?.value;
+  console.log("cookies = ", await cookies());
+  const cookie = (await cookies()).get("session")?.value;
   console.log("cookie = ", cookie);
   const session = await decrypt(cookie);
 
   // 4. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !session?.userId) {
+    console.log("middleware: redirect to /login");
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
@@ -32,6 +33,7 @@ export default async function middleware(req: NextRequest) {
     session?.userId &&
     !req.nextUrl.pathname.startsWith("/dashboard")
   ) {
+    console.log("middleware: redirect to /dashboard");
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
