@@ -23,7 +23,7 @@ export async function decrypt(session: string | undefined = "") {
     });
     return payload;
   } catch (error) {
-    console.error("error = ", error);
+    // console.error("error = ", error);
     console.log("Failed to verify session");
   }
 }

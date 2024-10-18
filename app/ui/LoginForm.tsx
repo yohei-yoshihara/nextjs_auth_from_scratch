@@ -22,6 +22,7 @@ export function LoginForm() {
             id="name"
             name="name"
             placeholder="Name"
+            defaultValue="test1"
           />
         </div>
       </div>
@@ -41,6 +42,7 @@ export function LoginForm() {
             id="password"
             name="password"
             type="password"
+            defaultValue="test12345!"
           />
         </div>
       </div>
