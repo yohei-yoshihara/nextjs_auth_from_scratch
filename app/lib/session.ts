@@ -80,7 +80,7 @@ export async function updateSession() {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   (await cookies()).set("session", session, {
     httpOnly: true,
-    secure: true,
+    secure: false, // this must be true if running on a production
     expires: expires,
     sameSite: "lax",
     path: "/",
