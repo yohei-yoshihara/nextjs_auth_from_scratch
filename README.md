@@ -6,9 +6,15 @@
 ## Initialize SQLite
 
 ```bash
-npx prisma db generate
+npx prisma generate
 npx prisma db push
-npx prisma db seed
+node prisma/seed.mjs
+```
+
+## Start server
+
+``` bash
+pnpm run dev
 ```
 
 ## Test User

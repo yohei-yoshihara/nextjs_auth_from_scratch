@@ -1,10 +1,12 @@
 "use client";
-
-import { useFormState, useFormStatus } from "react-dom";
+import { FormState } from "@/app/lib/definitions";
+import { useActionState } from "react";
 import { login } from "@/app/actions/auth";
 
+const initialState: FormState = {};
+
 export function LoginForm() {
-  const [state, action] = useFormState(login, undefined);
+  const [state, action, isPending] = useActionState(login, initialState);
 
   return (
     <form className="w-full max-w-lg border shadow-xl p-2 m-2" action={action}>
@@ -61,16 +63,14 @@ export function LoginForm() {
       <div className="flex items-center m-3">
         <div className="w-1/3"></div>
         <div className="w-2/3">
-          <SubmitButton />
+          <SubmitButton pending={isPending}/>
         </div>
       </div>
     </form>
   );
 }
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
+function SubmitButton({ pending }: { pending: boolean }) {
   return (
     <button
       className="bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-xl px-4 py-2 m-2"

@@ -9,7 +9,7 @@ import { createSession, deleteSession } from "@/app/lib/session";
 import { redirect } from "next/navigation";
 import { createUser, getUserByName } from "../lib/dbutils";
 
-export async function login(state: FormState, formData: FormData) {
+export async function login(state: FormState, formData: FormData) : Promise<FormState> {
   console.log(
     `login, name = ${formData.get("name")}, password=${formData.get(
       "password"
