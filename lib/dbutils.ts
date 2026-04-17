@@ -1,6 +1,5 @@
 "use server";
-import db from "@/app/lib/db";
-import { User } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 export async function createUser(
   name: string,
@@ -9,7 +8,7 @@ export async function createUser(
   team: string,
   role: string
 ) {
-  const user = await db.user.create({
+  const user = await prisma.user.create({
     data: {
       name: name,
       email: email,
@@ -23,7 +22,7 @@ export async function createUser(
 
 export async function getUserByName(name: string) {
   console.log(`getUser name=${name}`);
-  const user = await db.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       name: name,
     },

@@ -3,8 +3,8 @@ import "server-only";
 import { cache } from "react";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { decrypt } from "@/app/lib/session";
-import db from "@/app/lib/db";
+import { decrypt } from "@/lib/session";
+import { prisma } from "@/lib/prisma";
 
 export const verifySession = cache(async () => {
   const cookie = (await cookies()).get("session")?.value;
@@ -24,7 +24,7 @@ export const getUser = cache(async () => {
   if (!session) return null;
 
   try {
-    const data = await db.user.findMany({
+    const data = await prisma.user.findMany({
       where: { id: session.userId },
       select: {
         id: true,

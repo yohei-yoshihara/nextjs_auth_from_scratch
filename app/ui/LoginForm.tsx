@@ -1,5 +1,5 @@
 "use client";
-import { FormState } from "@/app/lib/definitions";
+import { FormState } from "@/lib/definitions";
 import { useActionState } from "react";
 import { login } from "@/app/actions/auth";
 

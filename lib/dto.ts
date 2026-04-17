@@ -1,9 +1,9 @@
 import "server-only";
-import { getUser } from "@/app/lib/dal";
-import db from "@/app/lib/db";
-import { User } from "@prisma/client";
+import { getUser } from "@/lib/dal";
+import { prisma } from "@/lib/prisma";
+import { User } from "@/generated/prisma/client";
 
-db.user;
+prisma.user;
 
 function canSeeUsername(viewer: User) {
   return true;

@@ -1,4 +1,4 @@
-import { getUser } from "../lib/dal";
+import { getUser } from "@/lib/dal";
 
 const containerClass = "flex items-center m-3";
 const labelClass = "w-1/3 text-gray-500 font-bold pr-4";

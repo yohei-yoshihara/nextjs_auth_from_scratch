@@ -2,12 +2,12 @@ import {
   LoginFormSchema,
   SignupFormSchema,
   FormState,
-} from "@/app/lib/definitions";
+} from "@/lib/definitions";
 import bcrypt from "bcryptjs";
-import db from "@/app/lib/db";
-import { createSession, deleteSession } from "@/app/lib/session";
+import { prisma } from "@/lib/prisma";
+import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
-import { createUser, getUserByName } from "../lib/dbutils";
+import { createUser, getUserByName } from "@/lib/dbutils";
 
 export async function login(state: FormState, formData: FormData) : Promise<FormState> {
   console.log(

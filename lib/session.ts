@@ -1,8 +1,8 @@
 "use server";
 import { SignJWT, jwtVerify } from "jose";
-import { SessionPayload } from "@/app/lib/definitions";
+import { SessionPayload } from "@/lib/definitions";
 import { cookies } from "next/headers";
-import db from "@/app/lib/db";
+import { prisma } from "@/lib/prisma";
 
 const secretKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -46,7 +46,7 @@ export async function createSession(id: number, role: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
   // 1. Create a session in the database
-  const s = await db.session.create({
+  const s = await prisma.session.create({
     data: {
       userId: id,
       expiresAt: expiresAt.toISOString(),

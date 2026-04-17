@@ -1,4 +1,4 @@
-import { verifySession } from "@/app/lib/dal";
+import { verifySession } from "@/lib/dal";
 import AdminDashboard from "@/app/ui/AdminDashboard";
 import UserDashboard from "@/app/ui/UserDashboard";
 import { redirect } from "next/navigation";
